@@ -29,14 +29,21 @@
 
 \subsection{Molten salt reactors}
 \begin{frame}
-  \frametitle{Molten Salt Reactors types}
+  \frametitle{Molten Salt Reactor Types}
                   \vspace*{-0.1in}
               \begin{block}{Stationary Fuel}
                \begin{enumerate}
                 \item Graphite block with TRISO fuel, clean salt works as coolant (e.g. TMSR-SF1, FHR-DR)
                 \item Plate Fuel: hexagonal fuel assembly is similar in shape to a typical sodium-cooled reactor
-                \item Fuel Inside Radial Moderator (FIRM)
-                \item Liquid fuel salt inside fuel rods cooled by clean salt (e.g. Moltex Stable Salt Reactor)
+                        % Not sure what FIRM is.
+                %\item Fuel Inside Radial Moderator (FIRM)
+                        % While it doesn't leave the reactor, doesn't 
+                        % the fuel in the moltex reactor move up and down?
+                        % If the fluid is free to naturally circulate inside 
+                        % the rod, it likely happens on 
+                        % timescales that I do not think we can ignore from a 
+                        % kinetics perspective. 
+                %\item Liquid fuel salt inside fuel rods cooled by clean salt (e.g. Moltex Stable Salt Reactor)
                \end{enumerate}
                \end{block}
                
@@ -51,8 +58,8 @@
 
 \begin{frame}
   \frametitle{Stationary and Mobile Solid fuel}
+        \vspace*{-0.1in}
                \begin{figure}[t]
-                \vspace*{-0.11in}
 			\hspace*{-0.35in}
                 \includegraphics[height=0.63\textwidth]{./images/solid_fuel.jpg}
                 \caption{TRISO fuel particle (top) and FHR fuel designs (bottom). Source \cite{forsberg_basis_2016-1}.}
@@ -66,7 +73,7 @@
                 \vspace*{-0.1in}
 			\hspace*{-0.35in}
                 \includegraphics[height=0.6\textwidth]{./images/mcfr-crossection.jpg}
-                \caption{TerraPower MCFR is an example of reactor design with \textbf{liquid, mobile, non-circulating} chloride salt fuel. Source \cite{doene_southern_2018}.}
+                \caption{The TerraPower MCFR is an example of reactor design with \textbf{liquid, mobile, non-circulating} chloride salt fuel. Source \cite{doene_southern_2018}.}
              \end{figure}   
   
 \end{frame}
@@ -99,7 +106,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Challenges in simulation \gls{MSR}}
+  \frametitle{Challenges in \gls{MSR} Simulation}
                   \vspace*{-0.05in}
                \begin{enumerate}
                 \item Contemporary burnup codes cannot treat fuel movement
