@@ -8,7 +8,6 @@
 \end{frame}
 
 
-
 \begin{frame}
   \frametitle{Moltres (coupling in MOOSE)}
    \begin{block}{Moltres principal concept \cite{lindsay_introduction_2018}}
@@ -74,26 +73,21 @@ more accurate Jacobians $\Rightarrow$ more efficient convergence
 &\frac{P}{\int_{\partial V} \sum_{g' = 1}^G \nu \Sigma_{g'}^f \phi_{g'} dV}
 \sum_{g' = 1}^G \nu \Sigma_{g'}^f \phi_{g'}\\
 \intertext{GammaHeatSource} &\gamma Q_f\\
+        &\gamma = \mbox{moderator heat dissipation by gamma and neutron 
+        irradiation}\\
+        &Q_f = \sum_{g=1}^G \epsilon_{f,g}\Sigma_{f,g}\phi_g\\
+        &\epsilon_{f,g} = \mbox{ heat per fission event.}\\
+\intertext{GroupDiffusion}
+& \nabla \cdot D_g
+        \nabla \phi_g\\
 \end{align*}
-
-where $\gamma$ is a factor
-representing heat dissipation by gamma and neutron irradiation in the moderator
-and $Q_f$ is given by:
-
-\begin{align*}
-\sum_{g=1}^G \epsilon_{f,g}\Sigma_{f,g}\phi_g\\
-\end{align*}
-
-with $\epsilon_{f,g}$ being the amount of heat per fission event.}
+}
 \end{frame}
 
 \begin{frame}
         \frametitle{Moltres Kernels}
-        \footnotesize{
+\footnotesize{
 \begin{align*}
-\intertext{GroupDiffusion}
-& \nabla \cdot D_g
-        \nabla \phi_g\\
 \intertext{InScatter}
 &\sum_{g \ne g'}^G
         \Sigma_{g'\rightarrow g}^s \phi_{g'}\\
@@ -104,6 +98,12 @@ with $\epsilon_{f,g}$ being the amount of heat per fission event.}
 \intertext{PrecursorSource}
 &\sum_{g'= 1}^G \beta_i \nu
         \Sigma_{g'}^f \phi_{g'}\\
+\intertext{ScalarAdvectionArtDiff}
+&\nabla \cdot -\delta \nabla u\\
+        &\delta = \mbox{artificial diffusion coefficient}\\
+        &\delta = \frac{|\vec{a}| h_{max}}{2}\\
+        &\vec{a} = \mbox{advection velocity}\\
+        &h_{max} = \mbox{max element length}
 \end{align*}
 }
 \end{frame}
@@ -111,15 +111,6 @@ with $\epsilon_{f,g}$ being the amount of heat per fission event.}
 \begin{frame}
         \frametitle{Moltres Kernels}
         \footnotesize{
-\begin{align*}
-\intertext{ScalarAdvectionArtDiff}
-&\nabla \cdot -\delta \nabla u\\
-\end{align*}
-where $\delta$ is an artificial diffusion coefficient, with $\vec{a}$ the 
-        advection velocity and $h_{max}$ the maximum element length dimension:
-\begin{align*}
-&\delta = \frac{|\vec{a}| h_{max}}{2}\\
-\end{align*}
 \begin{align*}
 \intertext{ScalarTransportTimeDerivative}
 &\frac{\partial u}{\partial t}\\
