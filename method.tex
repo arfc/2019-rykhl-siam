@@ -1,10 +1,11 @@
+\subsection{Basics}
 \begin{frame}
-	\frametitle{Obtaining Moltres}
-               \begin{figure}[t]
-                \includegraphics[height=0.15\textwidth]{./images/clone_moltres.png}
-               \end{figure}   
+        \frametitle{Acquiring Moltres}
+             \texttt{git clone https://github.com/arfc/moltres}\\
+        \texttt{cd moltres}\\
+        \texttt{git submodule init}\\
+        \texttt{git submodule update}\\
 \end{frame}
-
 
 
 \begin{frame}
@@ -41,35 +42,118 @@ more accurate Jacobians $\Rightarrow$ more efficient convergence
 	    \end{itemize}
 \end{frame}
 
-
+\subsection{Kernels}
 \begin{frame}
-  \frametitle{Moltres Kernels}
-    \begin{columns}
-    \column[t]{6cm}
-               \begin{figure}[t]
-                  \vspace*{-0.15in}
-                 \hspace*{-0.35in}
-                \includegraphics[height=1.15\textwidth]{./images/kernels4.png}
-               \end{figure}   
+        \frametitle{Moltres Kernels}
+        \footnotesize{Typical symbols (e.g. $\phi=\mbox{ neutron flux}$, 
+                $T=\mbox{ temperature}$, and $C=\mbox{ precursor 
+                concentrations}$).
 
-    \column[t]{6cm}
-	\begin{itemize}
-		\item Kernels are individual pieces of governing equations
-		\item Modular (i.e. ``Diffusion" kernel could be used equally well to describe conduction or viscous shear)
-	\end{itemize}
-    \end{columns}  
-  
+\begin{align*}
+\intertext{CoupledFissionEigenKernel} 
+&\frac{\chi_g^p}{k} \sum_{g' = 1}^G (1 -
+        \beta) \nu \Sigma_{g'}^f \phi_{g'}\\
+\intertext{CoupledFissionKernel} 
+&\chi_g^p \sum_{g' = 1}^G (1 -
+        \beta) \nu \Sigma_{g'}^f \phi_{g'}\\
+\intertext{CoupledScalarAdvection} 
+&\nabla \cdot \vec{a} u\\
+\intertext{DelayedNeutronSource} 
+&\chi_g^d \sum_i^I \lambda_i C_i\\
+\intertext{DivFreeCoupledScalarAdvection}
+&\vec{a} \cdot \nabla u
+\end{align*}}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Moltres Kernels (2)}
-               \begin{figure}[t]
-               \vspace*{-0.1in}
-                 \hspace*{-0.35in}
-                \includegraphics[height=0.6\textwidth]{./images/kernels11.png}
-               \end{figure}   
+        \frametitle{Moltres Kernels}
+        \footnotesize{
+\begin{align*}
+\intertext{FissionHeatSource}
+&\frac{P}{\int_{\partial V} \sum_{g' = 1}^G \nu \Sigma_{g'}^f \phi_{g'} dV}
+\sum_{g' = 1}^G \nu \Sigma_{g'}^f \phi_{g'}\\
+\intertext{GammaHeatSource} &\gamma Q_f\\
+        &\gamma = \mbox{moderator heat dissipation by gamma and neutron 
+        irradiation}\\
+        &Q_f = \sum_{g=1}^G \epsilon_{f,g}\Sigma_{f,g}\phi_g\\
+        &\epsilon_{f,g} = \mbox{ heat per fission event.}\\
+\intertext{GroupDiffusion}
+& \nabla \cdot D_g
+        \nabla \phi_g\\
+\end{align*}
+}
 \end{frame}
 
+\begin{frame}
+        \frametitle{Moltres Kernels}
+\footnotesize{
+\begin{align*}
+\intertext{InScatter}
+&\sum_{g \ne g'}^G
+        \Sigma_{g'\rightarrow g}^s \phi_{g'}\\
+\intertext{NtTimeDerivative}
+&\frac{1}{v_g}\frac{\partial \phi_g}{\partial t}\\
+\intertext{PrecursorDecay}
+&\lambda_i C_i\\
+\intertext{PrecursorSource}
+&\sum_{g'= 1}^G \beta_i \nu
+        \Sigma_{g'}^f \phi_{g'}\\
+\intertext{ScalarAdvectionArtDiff}
+&\nabla \cdot -\delta \nabla u\\
+        &\delta = \mbox{artificial diffusion coefficient}\\
+        &\delta = \frac{|\vec{a}| h_{max}}{2}\\
+        &\vec{a} = \mbox{advection velocity}\\
+        &h_{max} = \mbox{max element length}
+\end{align*}
+}
+\end{frame}
+
+\begin{frame}
+        \frametitle{Moltres Kernels}
+        \footnotesize{
+\begin{align*}
+\intertext{ScalarTransportTimeDerivative}
+&\frac{\partial u}{\partial t}\\
+\intertext{SelfFissionEigenKernel}
+&\frac{-\nu_f \Sigma_f \phi}{k}\\
+\intertext{SigmaR}
+&\Sigma_g^r \phi_g\\
+\intertext{TransientFissionHeatSource}
+&\sum_{g=1}^G \epsilon_{f,g}\Sigma_{f,g}\phi_g\\
+\end{align*}
+        }
+\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Moltres Kernels}
+%    \begin{columns}
+%    \column[t]{6cm}
+%               \begin{figure}[t]
+%                  \vspace*{-0.15in}
+%                 \hspace*{-0.35in}
+%                \includegraphics[height=1.15\textwidth]{./images/kernels4.png}
+%               \end{figure}   
+%
+%    \column[t]{6cm}
+%	\begin{itemize}
+%		\item Kernels are individual pieces of governing equations
+%		\item Modular (i.e. ``Diffusion" kernel could be used equally well to describe conduction or viscous shear)
+%	\end{itemize}
+%    \end{columns}  
+%  
+%\end{frame}
+%
+%\begin{frame}
+%  \frametitle{Moltres Kernels (2)}
+%               \begin{figure}[t]
+%               \vspace*{-0.1in}
+%                 \hspace*{-0.35in}
+%                \includegraphics[height=0.6\textwidth]{./images/kernels11.png}
+%               \end{figure}   
+%\end{frame}
+
+\subsection{Governing Equations}
 
 \begin{frame}
   \frametitle{Governing Equations}
@@ -106,30 +190,30 @@ more accurate Jacobians $\Rightarrow$ more efficient convergence
 \end{frame}
 
 \begin{frame}
-  \frametitle{Moltres \gls{MSRE} Simulation}
+  \frametitle{Moltres \gls{MSRE} Simulations}
               \begin{figure}[t]
                \hspace*{-0.25in}
                 \includegraphics[height=0.65\textwidth]{./images/msre.png}
                \end{figure}   
 \end{frame}
 
-\begin{frame}
-  \frametitle{Moltres MSRE Simulation: Input Data}
-     \begin{block}{Main input parameters \cite{lindsay_introduction_2018}}
-     	\begin{itemize}
-     		\item 22.5\% volume fraction fuel
-     		\item Group constants generated with SERPENT or NEWT (3D or 2D)
-     	\end{itemize}
-              \begin{figure}[t]
-                 \vspace*{-0.15in}
-                 \hspace*{-2.0in}
-                \includegraphics[height=0.2\textwidth]{./images/moltres-composition.png}
-               \end{figure}     
-               \begin{figure}[t]
-                 \vspace*{-0.25in}
-                \includegraphics[height=0.33\textwidth]{./images/moltres-input.png}
-               \end{figure}   
-
-	\end{block}
-	
-\end{frame}
+%\begin{frame}
+%  \frametitle{Moltres MSRE Simulation: Input Data}
+%     \begin{block}{Main input parameters \cite{lindsay_introduction_2018}}
+%     	\begin{itemize}
+%     		\item 22.5\% fuel volume fraction
+%     		\item 2D axisymmetric and 3D core geometries derived 
+%                        Group constants generated with SERPENT or NEWT (3D or 2D)
+%     	\end{itemize}
+%              \begin{figure}[t]
+%                 \vspace*{-0.15in}
+%                 \hspace*{-2.0in}
+%                \includegraphics[height=0.2\textwidth]{./images/moltres-composition.png}
+%               \end{figure}     
+%               \begin{figure}[t]
+%                 \vspace*{-0.25in}
+%                \includegraphics[height=0.33\textwidth]{./images/moltres-input.png}
+%               \end{figure}   
+%	\end{block}
+%	
+%\end{frame}
