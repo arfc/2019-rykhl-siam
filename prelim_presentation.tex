@@ -7,15 +7,15 @@
 \documentclass[9pt]{beamer}
 \usetheme[white]{Illinois}
 %\title[short title]{long title}
-\title{Simulation of Molten Salt Reactors with Moltres}
+\title[Fuel processing simulation tool for liquid-fueled reactors]{Fuel processing simulation tool for liquid-fueled nuclear reactors \\ Preliminary Exam}
 %\subtitle[short subtitle]{long subtitle}
 %\subtitle[Short SubTitle]{Mostly Kittens}
 %\author[short name]{long name}
-\author[Andrei Rykhlevskii]{Andrei Rykhlevskii\inst{1}, Alexander Lindsay\inst{2}, Kathryn Huff\inst{1}\\Advanced Reactors and Fuel Cycles Group}
+\author[Andrei Rykhlevskii]{Andrei Rykhlevskii}
 %\date[short date]{long date}
-\date[02.26.2019]{Feb 26, 2019}
+\date[05.05.2019]{September 5, 2019}
 %\institution[short name]{long name}
-\institute[UIUC]{\inst{1} University of Illinois at Urbana-Champaign \and \inst{2} Idaho National Laboratory}
+\institute[UIUC]{University of Illinois at Urbana-Champaign}
 
 
 \usepackage{lmodern}
@@ -24,15 +24,16 @@
 \usepackage{tikz}
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{caption}  % allows center figures caption
 \usepackage{xspace}
 \usepackage{notoccite}
 \usepackage{graphicx}
 \usepackage{animate}
 \usepackage{subfigure}
-\usepackage{media9}
 \usepackage{booktabs} % nice rules for tables
 \usepackage{microtype} % if using PDF
 \usepackage{bigints}
+\usepackage[absolute,overlay]{textpos}
 %\usepackage{minted}
 \usepackage{xcolor}
 \usepackage{soul}
@@ -46,11 +47,11 @@
 %I need some complimentary error funcitons... 
 \DeclareMathOperator{\erfc}{erfc}
 %page numbers
-\setbeamertemplate{footline}[page number]
+\setbeamertemplate{page number in head/foot}[appendixframenumber]
 \setbeamertemplate{caption}[numbered]
 %Those icons in the references are terrible looking
 \setbeamertemplate{bibliography item}[text]
-
+\setbeamercovered{dynamic}
 %%%% Acronym support
 
 \usepackage[acronym,toc]{glossaries}
@@ -100,25 +101,32 @@
 \section{Introduction}
 \input{introduction}
 \section{Methodology}
-\input{method}
-\section{Results}
-\input{results}
-\section{Conclusions}
-\input{conclusion}
-\subsection{Acknowledgements}
-\input{acks}
+\input{demo}
+\section{Preliminary results}
+\input{safety}
+\section{Future work}
+\input{proposal}
 %%--------------------------------%%
 %%--------------------------------%%
 \begin{frame}[allowframebreaks]
   \frametitle{References}
   \bibliographystyle{unsrt}
-  {\footnotesize \bibliography{bibliography.bib} }
+  {\footnotesize \bibliography{../thesisrefs.bib} }
 
 \end{frame}
 
 %%--------------------------------%%
 %%---BACKUP SLIDES----------------%%
+\begin{frame}
+\frametitle{SaltProc architecture}
+\vspace{-2mm}
+\begin{figure}[ht!] % replace 't' with 'b' to \centering
+	\includegraphics[width=0.84\textwidth]{../figures/saltproc_class_diagram.png}
+	\caption{SaltProc v1.0 python package class diagram in UML notation 
+		with examples of object instances.}
+\end{figure}
 
+\end{frame}	
 
 
 

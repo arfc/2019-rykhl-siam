@@ -1,2 +1,2 @@
-# 2019-rykhl-siam
-#Presentation for SIAM CSE 2019 about Moltres
+# 2019-rykhl-prelim-saltproc
+#Presentation for preliminary exam
